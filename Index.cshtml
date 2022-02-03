@@ -1,0 +1,164 @@
+@{
+    ViewData["Title"] = "Current Time";
+
+    var CurrentDateTime = DateTime.Now;
+    var CurrentUtcDateTime = DateTime.UtcNow;
+
+    var EasternTimeZoneTarget = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    var CentralTimeZoneTarget = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+    var MountainTimeZoneTarget = TimeZoneInfo.FindSystemTimeZoneById("Mountain Standard Time");
+    var PacificTimeZoneTarget = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+    
+    var NowEST = TimeZoneInfo.ConvertTime(CurrentDateTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+    var UtcNowEST = TimeZoneInfo.ConvertTimeFromUtc(CurrentUtcDateTime, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+
+    var NowCST = TimeZoneInfo.ConvertTime(CurrentDateTime, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
+    var UtcNowCST = TimeZoneInfo.ConvertTimeFromUtc(CurrentUtcDateTime, TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time"));
+
+    var NowMST = TimeZoneInfo.ConvertTime(CurrentDateTime, TimeZoneInfo.FindSystemTimeZoneById("Mountain Standard Time"));
+    var UtcNowMST = TimeZoneInfo.ConvertTimeFromUtc(CurrentUtcDateTime, TimeZoneInfo.FindSystemTimeZoneById("Mountain Standard Time"));
+
+    var NowPST = TimeZoneInfo.ConvertTime(CurrentDateTime, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
+    var UtcNowPST = TimeZoneInfo.ConvertTimeFromUtc(CurrentUtcDateTime, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
+}
+
+ <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @@media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+<div class="text-center">
+    <h1 class="display-4">Server Time Zone Tester</h1>
+
+    <div class="row" data-masonry='{"percentPosition": true }'>
+  
+     <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Time Zones</h5>
+          <p class="card-text">              
+                @foreach (var info in TimeZoneInfo.GetSystemTimeZones())
+                {
+                    @info.Id <span>&#40;</span>@info.BaseUtcOffset<span>&#41;</span><br />
+                }
+           </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Server Time</h5>
+          <p class="card-text">
+              Local: @CurrentDateTime
+              <br />
+              UTC: @CurrentUtcDateTime</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted from Local</h5>
+          <p class="card-text"><small class="text-muted">Local: @CurrentDateTime</small></p>
+          <p class="card-text">              
+              <p>
+                  EST: @NowEST<br />
+                  CST: @NowCST<br />
+                  MST: @NowMST<br />
+                  PST: @NowPST
+                </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted from UTC</h5>
+          <p class="card-text"><small class="text-muted">UTC: @CurrentUtcDateTime</small></p>
+          <p class="card-text">              
+              <p>
+                  EST: @UtcNowEST<br />
+                  CST: @UtcNowCST<br />
+                  MST: @UtcNowMST<br />
+                  PST: @UtcNowPST
+                </p>
+        </div>
+      </div>
+    </div>
+
+   
+    
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted to EST</h5>
+          <p class="card-text">
+              Local: @NowEST
+              <br />
+              UTC: @UtcNowEST</p>
+          <p class="card-text"><small class="text-muted">Eastern Standard Time</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted to CST</h5>
+          <p class="card-text">
+              Local: @NowCST
+              <br />
+              UTC: @UtcNowCST</p>
+          <p class="card-text"><small class="text-muted">Central Standard Time</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted to MST</h5>
+          <p class="card-text">
+              Local: @NowMST
+              <br />
+              UTC: @UtcNowMST</p>
+          <p class="card-text"><small class="text-muted">Mountain Standard Time</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Converted to PST</h5>
+          <p class="card-text">
+              Local: @NowPST
+              <br />
+              UTC: @UtcNowPST</p>
+          <p class="card-text"><small class="text-muted">Pacific Standard Time</small></p>
+        </div>
+      </div>
+    </div>
+
+     
+
+    
+</div>
